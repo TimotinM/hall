@@ -8,6 +8,7 @@ namespace Hall.Services
 {
      public interface IOrder
      {
-          Order CreateOrder(int id, int tableId, int waiterId);
+         //Distribution CreateOrder(int id, int tableId, int waiterId);
+          void SendOrder(string url, OrderToSend data);
      }
 }

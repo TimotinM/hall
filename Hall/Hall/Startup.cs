@@ -26,7 +26,7 @@ namespace Hall
           public void ConfigureServices(IServiceCollection services)
           {
                services.AddControllersWithViews();
-               services.AddScoped<IOrder, OrderServices>();
+               //services.AddScoped<IOrder, OrderServices>();
 
                services.AddSwaggerGen();
           }

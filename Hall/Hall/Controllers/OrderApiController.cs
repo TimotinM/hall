@@ -1,25 +1,23 @@
-﻿using Hall.Services;
+﻿using Hall.Models;
+using Hall.Services;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
+using System;
+using System.Linq;
+using System.Text.Json;
 
 namespace Hall.Controllers
 {
-     [Route("[controller]")]
-     [ApiController]
-     [Produces("application/json")]
      public class OrderApiController : Controller
      {
-          private readonly IOrder _order;
 
-          public OrderApiController(IOrder order)
+          [HttpPost("distribution")]
+          public IActionResult Order([FromBody] Distribution distribution)
           {
-               _order = order;
-          }
-
-          [HttpPost("Order")]
-          public IActionResult Order()
-          {
-               var response = _order.CreateOrder(1, 1, 1);
-               return Json(response);
+               Console.WriteLine("received order");
+               var waiter = DiningHall.Instance.Waiters.Single(waiter => waiter.Id == distribution.waiter_id);
+               waiter.ServeOrder(distribution);
+               return Ok();
           }
      }
 }
